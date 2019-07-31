@@ -1,0 +1,22 @@
+<?php
+
+use Drupal\Component\Utility\Html;
+
+/**
+ * Add path alias to body class.
+ */
+function ndw_addpageclass_preprocess_html(&$vars) {
+
+	// Add user role to body class
+	$current_user = \Drupal::currentUser();
+	$roles = $current_user->getRoles();
+	foreach($roles as $role){
+		$vars['attributes']['class'][] = 'user--' . Html::cleanCssIdentifier($role);
+	}
+
+	// Add page to body class
+	$current_path = \Drupal::service('path.current')->getPath();
+	$result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+	$vars['attributes']['class'][] = 'page--' . Html::cleanCssIdentifier($result);
+	
+}

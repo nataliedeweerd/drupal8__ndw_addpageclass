@@ -1,0 +1,5 @@
+name: "NdW - Add Page Class"
+description: "Adds page alias as a class on the body."
+type: module
+core: 8.x
+package: "NdW"
